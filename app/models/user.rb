@@ -45,6 +45,10 @@
 
 class User < ApplicationRecord
   has_many :btc_addresses
+  has_one :account
+
+  before_save :build_account
+  after_commit :build_first_btc_account
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
@@ -84,5 +88,11 @@ class User < ApplicationRecord
 
   def email_changed?
     false
+  end
+
+  private
+
+  def build_first_btc_account
+    btc_addresses.count.zero? ? btc_addresses << BtcAddress.new : 0
   end
 end
