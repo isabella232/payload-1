@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 Rails.application.routes.draw do
+  resources :btc_addresses
   get 'dashboard' => 'dashboard#show'
 
   devise_for :users, controllers: {

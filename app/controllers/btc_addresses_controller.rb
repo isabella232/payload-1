@@ -1,0 +1,2 @@
+class BtcAddressesController < ApplicationController
+end
