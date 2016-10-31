@@ -42,6 +42,8 @@ gem 'rails-assets-semantic', source: 'https://rails-assets.org'
 gem 'config'
 # authorization
 gem 'pundit'
+# coinbase, duhh
+gem 'coinbase'
 
 # Use Capistrano for deployment
 gem 'capistrano-rails', group: :development
