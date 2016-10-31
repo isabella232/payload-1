@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 Rails.application.routes.draw do
+  resources :accounts
   resources :btc_addresses
   get 'dashboard' => 'dashboard#show'
 
