@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class BtcAddressesController < ApplicationController
   # before_action :authenticate_user!
   # def create
