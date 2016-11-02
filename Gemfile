@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 source 'https://rubygems.org'
 
 # specify ruby
@@ -103,4 +104,4 @@ group :production, :staging do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: ['mingw', 'mswin', 'x64_mingw', 'jruby']
+gem 'tzinfo-data', platforms: %w(mingw mswin x64_mingw jruby)

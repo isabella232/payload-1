@@ -21,12 +21,12 @@ default: &default
 
 development:
   <<: *default
-  database: amingilani_development
+  database: payload_development
 
 test:
   <<: *default
   # compatible with travis
-  database: <%= ENV['TRAVIS'] ? 'travis_ci_test' : 'amingilani_test' %>
+  database: <%= ENV['TRAVIS'] ? 'travis_ci_test' : 'payload_test' %>
 
 production:
   <<: *default

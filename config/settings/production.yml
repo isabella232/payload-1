@@ -1,5 +1,5 @@
 host:
-  host: gilani-starter.herokuapp.com
+  host: app.payload.pk
 smtp:
   address: <%= ENV['SMTP_HOST'] %>
   port: <%= ENV['SMTP_PORT'] %>
