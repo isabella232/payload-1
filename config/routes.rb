@@ -1,5 +1,11 @@
 # frozen_string_literal: true
 Rails.application.routes.draw do
+  get 'verification/personal'
+
+  get 'verification/business'
+
+  get 'verification/banking'
+
   resources :accounts
   resources :btc_addresses
   get 'dashboard' => 'dashboard#show'
