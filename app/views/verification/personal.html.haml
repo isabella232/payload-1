@@ -1,2 +1,21 @@
-%h1 Verification#personal
-%p Find me in app/views/verification/personal.html.haml
+.ui.container
+  .ui.three.column.grid
+    .six.wide.column
+      .ui.vertical.steps
+        .active.step
+          %i.user.icon
+          .content
+            .title Personal
+            .description Verify your personal information
+        .disabled.step
+          %i.building.icon
+          .content
+            .title Business
+            .description Verify your business profile
+        .disabled.step
+          %i.credit.card.icon
+          .content
+            .title Banking
+            .description Confirm your banking details
+    .ten.wide.column
+      %p Find me in app/views/verification/personal.html.haml
