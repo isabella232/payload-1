@@ -46,6 +46,7 @@
 class User < ApplicationRecord
   has_many :btc_addresses
   has_one :account
+  has_one :verification_personal
 
   before_save :build_account
   after_commit :build_first_btc_account

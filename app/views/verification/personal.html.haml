@@ -1,6 +1,6 @@
 .ui.container
   .ui.three.column.grid
-    .six.wide.column
+    .five.wide.column
       .ui.vertical.steps
         .active.step
           %i.user.icon
@@ -17,5 +17,66 @@
           .content
             .title Banking
             .description Confirm your banking details
-    .ten.wide.column
-      %p Find me in app/views/verification/personal.html.haml
+    .eight.wide.column
+      .ui.form
+        .ui.dividing.header Personal Verification
+        = form_for(@verification_personal) do |f|
+          .field
+            = f.label :name, 'Legal name'
+            = f.text_field :name
+          .field
+            = f.label :dob, 'Date of Birth'
+            = f.date_field :dob
+          .field
+            = f.label "Please select your biological gender"
+            .inline.fields
+              .field
+                .ui.radio.checkbox
+                  = f.radio_button :male, 'true'
+                  = f.label :male_true, 'Male'
+              .field
+                .ui.radio.checkbox
+                  = f.radio_button :male, 'false'
+                  = f.label :male_false, 'Female'
+          .field
+            = f.label :email_primary, 'Primary contact email'
+            = f.email_field :email_primary, value: current_user.email
+          .field
+            = f.label :phone_mobile, 'Mobile phone number'
+            = f.text_field :phone_mobile
+          .field
+            = f.label :phone_secondary, 'Secondary phone number'
+            = f.text_field :phone_secondary
+          .field
+            = f.label :address_current, 'Current Address'
+            = f.text_field :address_current
+          .field
+            = f.label :address_permanent, 'Permanent Address'
+            = f.text_field :address_permanent
+          .field
+            = f.label :id_cnic, 'CNIC Number'
+            = f.text_field :id_cnic
+          .field
+            = f.label "Have you ever been convicted in a court of law?"
+            .inline.fields
+              .field
+                .ui.radio.checkbox
+                  = f.radio_button :convicted, 'true'
+                  = f.label :convicted_true, 'Yes'
+              .field
+                .ui.radio.checkbox
+                  = f.radio_button :convicted, 'false'
+                  = f.label :convicted_false, 'No'
+          .field
+            = f.label "Have you ever been a member of an organization deemed illegal in the state of Pakistan?"
+            .inline.fields
+              .field
+                .ui.radio.checkbox
+                  = f.radio_button :terrorist, 'true'
+                  = f.label :terrorist_true, 'Yes'
+              .field
+                .ui.radio.checkbox
+                  = f.radio_button :terrorist, 'false'
+                  = f.label :terrorist_false, 'No'
+          .actions
+            = f.button 'I declare that this information is accurate', class: 'ui basic red button'

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 Rails.application.routes.draw do
+  resources :verification_personals
   get 'verification/personal'
 
   get 'verification/business'

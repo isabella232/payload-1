@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161031123157) do
+ActiveRecord::Schema.define(version: 20161108105010) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,25 @@ ActiveRecord::Schema.define(version: 20161031123157) do
     t.index ["username"], name: "index_users_on_username", unique: true, using: :btree
   end
 
+  create_table "verification_personals", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.date     "dob"
+    t.boolean  "male"
+    t.string   "email_primary"
+    t.string   "phone_mobile"
+    t.string   "phone_secondary"
+    t.string   "address_current"
+    t.string   "address_permanent"
+    t.string   "id_cnic"
+    t.boolean  "convicted"
+    t.boolean  "terrorist"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["user_id"], name: "index_verification_personals_on_user_id", using: :btree
+  end
+
   add_foreign_key "accounts", "users"
   add_foreign_key "btc_addresses", "users"
+  add_foreign_key "verification_personals", "users"
 end
