@@ -4,3 +4,8 @@
     %p
       Welcome
       =@user.username
+    %p
+      Your bitcoin address is
+      %pre
+        =@user.btc_addresses.last.address
+    %a.ui.button{href: btc_addresses_path, data: {method: :post}} Generate a new one
