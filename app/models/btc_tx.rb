@@ -47,4 +47,12 @@ class BtcTx < ApplicationRecord
   validates :amount, presence: true, numericality: true
   validates :coinbase_id, presence: true
   validates :native_currency, presence: true
+  validates :confirmation_status, presence: true
+
+  private
+
+  def set_defaults
+    self.native_currency ||= 'pkr'
+    self.confirmation_status = 'pending'
+  end
 end

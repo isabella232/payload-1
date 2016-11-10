@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 Rails.application.routes.draw do
+  post 'notifications/coinbase'
+
   resources :verification_personals
   get 'verification/personal'
-
   get 'verification/business'
-
   get 'verification/banking'
 
   resources :accounts

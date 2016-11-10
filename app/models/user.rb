@@ -45,6 +45,7 @@
 
 class User < ApplicationRecord
   has_many :btc_addresses
+  has_many :btc_txes, through: :btc_addresses
   has_one :account
   has_one :verification_personal
 
