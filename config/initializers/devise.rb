@@ -12,11 +12,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  if Settings.host.port.present? && Settings.host.port != 80
-    config.mailer_sender = "hello@#{Settings.host.name}:#{Settings.host.port}"
-  else
-    config.mailer_sender = "hello@#{Settings.host.name}"
-  end
+    config.mailer_sender = "hello@payload.pk"
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
