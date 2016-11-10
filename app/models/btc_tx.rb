@@ -39,7 +39,7 @@ class BtcTx < ApplicationRecord
   # confirmed: Confirmed on the blockchain but not yet traded
   # processing: Confirmed and traded, but not yet paid out
   # completed: paid out
-  enum confirmation_status: %i(pending confirmed processing complete)
+  enum confirmation_status: %i(pending confirmed processing completed reversed)
 
   # what currency was this btc exchanged for?
   enum native_currency: %i(pkr usd eur)
@@ -49,10 +49,28 @@ class BtcTx < ApplicationRecord
   validates :native_currency, presence: true
   validates :confirmation_status, presence: true
 
+  def check_status
+    require 'coinbase/wallet'
+
+    coinbase = Coinbase::Wallet::Client.new(
+      api_key:    Rails.application.secrets.coinbase_api_key,
+      api_secret: Rails.application.secrets.coinbase_api_secret
+    )
+    tx = coinbase.transaction(
+      Rails.application.secrets.coinbase_account_id,
+      coinbase_id
+    )
+
+    if confirmation_status == 'pending' && tx.status == 'completed'
+      self.confirmation_status = 'confirmed'
+      save
+    end
+  end
+
   private
 
   def set_defaults
     self.native_currency ||= 'pkr'
-    self.confirmation_status = 'pending'
+    self.confirmation_status ||= 'pending'
   end
 end
