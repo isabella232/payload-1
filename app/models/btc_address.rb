@@ -28,6 +28,7 @@ class BtcAddress < ApplicationRecord
   before_validation :create_btc_address
 
   belongs_to :user
+  has_many :btc_txes
 
   validates :user, presence: true
   validates :address, presence: true
