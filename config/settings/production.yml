@@ -3,5 +3,5 @@ host:
 smtp:
   address: <%= ENV['SMTP_HOST'] %>
   port: <%= ENV['SMTP_PORT'] %>
-  username: <%= ENV['SMTP_USERNAME'] %>
+  user_name: <%= ENV['SMTP_USERNAME'] %>
   password: <%= ENV['SMTP_PASSWORD'] %>
