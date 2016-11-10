@@ -36,8 +36,7 @@ class BtcAddress < ApplicationRecord
   private
 
   def create_btc_address
-    # seeded data doesn't require these things
-    require 'coinbase/wallet' if Rails.env.development?
+    require 'coinbase/wallet'
 
     coinbase = Coinbase::Wallet::Client.new(
       api_key:    Rails.application.secrets.coinbase_api_key,
