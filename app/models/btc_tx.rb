@@ -38,7 +38,7 @@ class BtcTx < ApplicationRecord
   # confirmed: Confirmed on the blockchain but not yet traded
   # processing: Confirmed and traded, but not yet paid out
   # completed: paid out
-  enum confirmation_status: %i(pending confirmed processing completed reversed)
+  enum confirmation_status: %i(pending trading withdrawing completed)
 
   # what currency was this btc exchanged for?
   enum native_currency: %i(pkr usd eur)
@@ -61,7 +61,7 @@ class BtcTx < ApplicationRecord
     )
 
     if confirmation_status == 'pending' && tx.status == 'completed'
-      self.confirmation_status = 'confirmed'
+      self.confirmation_status = 'trading'
       save
     end
   end
