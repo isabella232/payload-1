@@ -62,8 +62,9 @@ class BtcTx < ApplicationRecord
 
     if confirmation_status == 'pending' && tx.status == 'completed'
       self.confirmation_status = 'trading'
-      save
+      return save
     end
+    self
   end
 
   private
