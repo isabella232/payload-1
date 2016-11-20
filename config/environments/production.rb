@@ -84,7 +84,7 @@ Rails.application.configure do
   end
 
   # override the default logger and enable lograge for readible logs
-  config.logger = RemoteSyslogLogger.new('logs.papertrailapp.com', 22_777, program: 'payload-app')
+  config.logger = RemoteSyslogLogger.new(Settings.papertrail.host, Settings.papertrail.port, program: 'payload-app')
   config.lograge.enabled = true
 
   # add time to lograge
