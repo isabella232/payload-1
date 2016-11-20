@@ -101,6 +101,8 @@ end
 group :production, :staging do
   # Use Redis adapter to run Action Cable in production
   gem 'redis', '~> 3.0'
+  # Log everything to PaperTrail
+  gem 'remote_syslog_logger'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
