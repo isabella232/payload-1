@@ -50,8 +50,6 @@ Rails.application.configure do
   # Prepend all log lines with the following tags.
   config.log_tags = [ :request_id ]
 
-  config.logger = RemoteSyslogLogger.new('logs.papertrailapp.com', 22777, :program => "payload-app")
-
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
 
@@ -83,6 +81,8 @@ Rails.application.configure do
     logger.formatter = config.log_formatter
     config.logger = ActiveSupport::TaggedLogging.new(logger)
   end
+
+  config.logger = RemoteSyslogLogger.new('logs.papertrailapp.com', 22777, :program => "payload-app")
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
