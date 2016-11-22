@@ -77,9 +77,9 @@ class BtcTx < ApplicationRecord
 
   def send_order(amount_in_satoshi)
     HTTParty.post(
-      'http://requestb.in/17frxsy1',
+      'https://urdubit.payload.pk',
       query:   {
-        secret: 'thisisasecret'
+        secret: Rails.application.secrets.urdubit_secret
       },
       body:    { amount: amount_in_satoshi }.to_json,
       headers: { 'Content-Type' => 'application/json' }
