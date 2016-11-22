@@ -16,7 +16,7 @@
 # **`native_currency`**      | `integer`          |
 # **`created_at`**           | `datetime`         | `not null`
 # **`updated_at`**           | `datetime`         | `not null`
-# **`trade_id`**             | `integer`          | `not null`
+# **`trade_id`**             | `string`           |
 #
 # ### Indexes
 #
