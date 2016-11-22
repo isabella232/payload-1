@@ -62,8 +62,8 @@ class BtcTx < ApplicationRecord
 
     if confirmation_status == 'pending' && tx.status == 'completed'
       self.confirmation_status = 'trading'
-      order = send_order(amount * 1e8)
-      self.trade_id = order.to_h['OrderID']
+      order = send_order(amount * 1e8).to_h
+      self.trade_id = order['OrderID']
       return save
     end
     self
