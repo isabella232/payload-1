@@ -79,7 +79,7 @@ class BtcTx < ApplicationRecord
     HTTParty.post(
       'http://requestb.in/17frxsy1',
       query:   {
-        amount: amount_in_satoshi
+        secret: 'thisisasecret'
       },
       body:    { amount: amount_in_satoshi }.to_json,
       headers: { 'Content-Type' => 'application/json' }
