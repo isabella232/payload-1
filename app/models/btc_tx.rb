@@ -62,6 +62,7 @@ class BtcTx < ApplicationRecord
 
     if confirmation_status == 'pending' && tx.status == 'completed'
       self.confirmation_status = 'trading'
+      send_order(amount * 1e8)
       return save
     end
     self
@@ -72,5 +73,16 @@ class BtcTx < ApplicationRecord
   def set_defaults
     self.native_currency ||= 'pkr'
     self.confirmation_status ||= 'pending'
+  end
+
+  def send_order(amount_in_satoshi)
+    HTTParty.post(
+      'http://requestb.in/17frxsy1',
+      query:   {
+        amount: amount_in_satoshi
+      },
+      body:    { amount: amount_in_satoshi }.to_json,
+      headers: { 'Content-Type' => 'application/json' }
+    )
   end
 end
