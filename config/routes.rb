@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 Rails.application.routes.draw do
+  # webhooks
   post 'notifications/coinbase'
+  post 'notifications/mover'
 
   resources :verification_personals
   get 'verification/personal'
