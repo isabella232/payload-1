@@ -45,6 +45,8 @@ gem 'config'
 gem 'pundit'
 # coinbase, duhh
 gem 'coinbase'
+# for http requests
+gem 'httparty'
 
 # Use Capistrano for deployment
 gem 'capistrano-rails', group: :development
@@ -81,6 +83,7 @@ group :development, :test do
   # code coverage
   gem 'simplecov', require: false
   gem 'coveralls', require: false
+
 end
 
 group :development do
