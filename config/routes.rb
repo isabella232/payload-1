@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   # webhooks
   post 'notifications/coinbase'
   post 'notifications/mover'
+  post 'notifications/urdubit'
 
   resources :verification_personals
   get 'verification/personal'
