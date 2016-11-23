@@ -35,10 +35,10 @@ class NotificationsController < ApplicationController
     end
     # If the secret's good, just keep going
     trade_id = params['payload']['OrderID']
-    quantity = params['payload']['OrderQty'].to_d
-    price = params['payload']['LastPx'].to_d
+    quantity = params['payload']['CumQty'].to_d
+    price = params['payload']['AvgPx'].to_d
 
-    execution_price = (quantity * price / 1e8).round
+    execution_price = ((quantity * price) / 1e16).round
     BtcTx.find_by(trade_id: trade_id).confirm_trade(execution_price)
   end
 end
