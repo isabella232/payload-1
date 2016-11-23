@@ -20,6 +20,7 @@ class NotificationsController < ApplicationController
 
   def mover
     unless params[:secret] == Rails.application.secrets.mover_webhook_secret
+      logger.info('Invalid secret for mover recieved', params[:secret])
       return render json: { success: false, message: 'Invalid secret' }
     end
     # If the secret's good, just keep going
