@@ -7,4 +7,4 @@ smtp:
   password: <%= ENV['SMTP_PASSWORD'] %>
 papertrail:
   host: <%= ENV['PAPERTRAIL_HOST'] %>
-  port: <%= ENV['PAPERTRIL_PORT'] %>
+  port: <%= ENV['PAPERTRAIL_PORT'] %>
