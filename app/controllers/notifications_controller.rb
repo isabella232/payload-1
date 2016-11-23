@@ -20,7 +20,7 @@ class NotificationsController < ApplicationController
 
   def mover
     unless params[:secret] == Rails.application.secrets.mover_webhook_secret
-      logger.info('Invalid secret for mover recieved', params[:secret])
+      logger.info('Invalid secret for mover recieved')
       return render json: { success: false, message: 'Invalid secret' }
     end
     # If the secret's good, just keep going
@@ -30,10 +30,9 @@ class NotificationsController < ApplicationController
 
   def urdubit
     unless params[:secret] == Rails.application.secrets.urdubit_secret
-      logger.info('Invalid secret for mover recieved', params[:secret])
+      logger.info('Invalid secret for mover recieved')
       return render json: { success: false, message: 'Invalid secret' }
     end
-    logger.info('POST notification/urdubit', params)
     # If the secret's good, just keep going
     trade_id = params['payload']['OrderID']
     quantity = params['payload']['OrderQty'].to_d
