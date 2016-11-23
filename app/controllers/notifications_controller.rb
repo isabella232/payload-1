@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 class NotificationsController < ApplicationController
   # generally dangerious but this controller holds webhooks
-  skip_before_action :verify_authenticity_token, only: [:coinbase, :mover]
+  skip_before_action :verify_authenticity_token, only: %i(coinbase mover urdubit)
 
   def coinbase
     # If the secret is incorrect, drop it like it's hot
