@@ -26,4 +26,18 @@ class NotificationsController < ApplicationController
     # If the secret's good, just keep going
     UpdateBtcTxStatusJob.perform_now
   end
+
+  def urdubit
+    unless params[:secret] == Rails.application.secrets.urdubit_secret
+      logger.info('Invalid secret for mover recieved', params[:secret])
+      return render json: { success: false, message: 'Invalid secret' }
+    end
+    # If the secret's good, just keep going
+    trade_id = params['payload']['OrderID']
+    quantity = params['payload']['OrderQty'].to_d
+    price = params['payload']['LastPx'].to_d
+
+    execution_price = (quantity * price / 1e8).round
+    BtcTx.find_by(trade_id: trade_id).confirm_trade(execution_price)
+  end
 end

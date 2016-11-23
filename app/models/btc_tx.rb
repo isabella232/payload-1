@@ -38,7 +38,7 @@ class BtcTx < ApplicationRecord
   # confirmed: Confirmed on the blockchain but not yet traded
   # processing: Confirmed and traded, but not yet paid out
   # completed: paid out
-  enum confirmation_status: %i(pending trading withdrawing completed)
+  enum confirmation_status: %i(pending trading completed)
 
   # what currency was this btc exchanged for?
   enum native_currency: %i(pkr usd eur)
@@ -61,12 +61,19 @@ class BtcTx < ApplicationRecord
     )
 
     if confirmation_status == 'pending' && tx.status == 'completed'
-      self.confirmation_status = 'trading'
       order = send_order(amount * 1e8)
+      raise 'Order not processed' if order['OrderID'].nil?
       self.trade_id = order['OrderID']
+      self.confirmation_status = 'trading'
       return save
     end
     self
+  end
+
+  def confirm_trade(execution_price)
+    self.confirmation_status = 'completed'
+    self.native_amount = execution_price
+    save
   end
 
   private
