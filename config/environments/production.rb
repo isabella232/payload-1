@@ -85,12 +85,6 @@ Rails.application.configure do
 
   # override the default logger and enable lograge for readible logs
   config.logger = RemoteSyslogLogger.new(Settings.papertrail.host, Settings.papertrail.port, program: 'payload-app')
-  config.lograge.enabled = true
-
-  # add time to lograge
-  config.lograge.custom_options = lambda do |event|
-    { time: event.time }
-  end
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
