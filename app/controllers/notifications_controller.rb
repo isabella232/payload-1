@@ -25,6 +25,7 @@ class NotificationsController < ApplicationController
     end
     # If the secret's good, just keep going
     UpdateBtcTxStatusJob.perform_now
+    render json: { success: true, message: 'Job being performed' }
   end
 
   def urdubit
