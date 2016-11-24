@@ -57,7 +57,7 @@
             = f.label :id_cnic, 'CNIC Number'
             = f.text_field :id_cnic
           .field
-            = f.label "Have you ever been convicted in a court of law?"
+            = f.label :convicted, "Have you ever been convicted in a court of law?"
             .inline.fields
               .field
                 .ui.radio.checkbox
@@ -68,7 +68,7 @@
                   = f.radio_button :convicted, 'false'
                   = f.label :convicted_false, 'No'
           .field
-            = f.label "Have you ever been a member of an organization deemed illegal in the state of Pakistan?"
+            = f.label :terrorist, 'Have you ever been a member of an organization deemed illegal in the state of Pakistan?'
             .inline.fields
               .field
                 .ui.radio.checkbox
