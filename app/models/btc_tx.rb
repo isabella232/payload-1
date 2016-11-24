@@ -73,7 +73,10 @@ class BtcTx < ApplicationRecord
   def confirm_trade(execution_price)
     self.confirmation_status = 'completed'
     self.native_amount = execution_price
-    save
+    Account.transaction do
+      save!
+      btc_address.user.account.increment!(:balance, execution_price)
+    end
   end
 
   private
