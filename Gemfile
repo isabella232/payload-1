@@ -47,6 +47,8 @@ gem 'pundit'
 gem 'coinbase'
 # for http requests
 gem 'httparty'
+# for attachments
+gem 'paperclip'
 
 # Use Capistrano for deployment
 gem 'capistrano-rails', group: :development
@@ -83,7 +85,6 @@ group :development, :test do
   # code coverage
   gem 'simplecov', require: false
   gem 'coveralls', require: false
-
 end
 
 group :development do
