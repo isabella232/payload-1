@@ -1,14 +1,24 @@
 .ui.center.aligned.middle.aligned.grid
   .ui.eight.wide.column
-    %h1 Dashboard
-    %p
+    %h1
       Welcome
-      =@user.username
+      %strong=@user.username
     %p
-      Your bitcoin address is
-      %pre
-        =@user.btc_addresses.last.address
-    %a.ui.button{href: btc_addresses_path, data: {method: :post}} Generate a new one
+    .ui.two.column.grid
+      .ui.column
+        %p
+          Your bitcoin deposit address is
+        %pre
+          =@user.btc_addresses.last.address
+        %a.ui.button{href: btc_addresses_path, data: {method: :post}} Generate a new one
+      .ui.column
+        %p
+          Your account balance is
+        %p
+          =@user.account.balance.round
+          PKR
+        %a.ui.button{href: btc_addresses_path, data: {method: :post}} Withdraw
+
     %table.ui.celled.table
       %thead
         %tr
