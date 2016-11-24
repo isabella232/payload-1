@@ -31,6 +31,7 @@
 
 class BtcTx < ApplicationRecord
   belongs_to :btc_address
+  belongs_to :user, through: :btc_address
   before_validation :set_defaults
 
   # the status of the transaction
