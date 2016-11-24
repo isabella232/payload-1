@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20161124190638) do
     t.integer  "user_id"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
-    t.integer  "balance",    default: 0,     null: false
+    t.decimal  "balance",    default: "0.0", null: false
     t.index ["user_id"], name: "index_accounts_on_user_id", using: :btree
   end
 

@@ -12,7 +12,7 @@
 # **`user_id`**     | `integer`          |
 # **`created_at`**  | `datetime`         | `not null`
 # **`updated_at`**  | `datetime`         | `not null`
-# **`balance`**     | `integer`          | `default(0), not null`
+# **`balance`**     | `decimal(, )`      | `default(0.0), not null`
 #
 # ### Indexes
 #
