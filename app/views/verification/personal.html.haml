@@ -28,16 +28,20 @@
             = f.label :dob, 'Date of Birth'
             = f.date_field :dob
           .field
-            = f.label "Please select your biological gender"
+            = f.label "Please select your legal gender"
             .inline.fields
               .field
                 .ui.radio.checkbox
-                  = f.radio_button :male, 'true'
-                  = f.label :male_true, 'Male'
+                  = f.radio_button :gender, 'male'
+                  = f.label :gender_male, 'Male'
               .field
                 .ui.radio.checkbox
-                  = f.radio_button :male, 'false'
-                  = f.label :male_false, 'Female'
+                  = f.radio_button :gender, 'female'
+                  = f.label :gender_female, 'Female'
+              .field
+                .ui.radio.checkbox
+                  = f.radio_button :gender, 'khansa'
+                  = f.label :gender_khansa, 'Khansa'
           .field
             = f.label :email_primary, 'Primary contact email'
             = f.email_field :email_primary, value: current_user.email

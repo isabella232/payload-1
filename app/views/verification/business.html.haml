@@ -17,5 +17,19 @@
           .content
             .title Banking
             .description Confirm your banking details
-    .ten.wide.column
-      %p Find me in app/views/verification/personal.html.haml
+    .eight.wide.column
+      .ui.form
+        .ui.dividing.header Supporting Documents
+        %p Please attach the following documents
+        = form_for(@verification_supporting_documents) do |f|
+          .field
+            = f.label :cnic_front, 'Front of CNIC'
+            = f.file_field :cnic_front
+          .field
+            = f.label :cnic_back, 'Back of CNIC'
+            = f.file_field :cnic_back
+          .field
+            = f.label :proof_of_residence, 'Proof of Residence'
+            = f.file_field :proof_of_residence
+          .actions
+            = f.button 'I declare that this information is accurate', class: 'ui basic red button'

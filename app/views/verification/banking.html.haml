@@ -17,5 +17,49 @@
           .content
             .title Banking
             .description Confirm your banking details
-    .ten.wide.column
-      %p Find me in app/views/verification/personal.html.haml
+    .eight.wide.column
+      .ui.form
+        .ui.dividing.header Withdrawal details
+        %p
+          This information will be used when processing withdrawals. Please
+          ensure that this information is correct and that the money will be
+          recieved by you.
+        .ui.styled.accordion
+          .title
+            %i.dropdown.icon
+            Bank Transfer
+          .content
+            .transition.hidden
+              = form_for(@verification_banking) do |f|
+                .field
+                  = f.label :bank_name, 'Bank Name'
+                  = f.select(:dob, @bank_list, {} , class: 'ui dropdown bank-name')
+                  = f.text_field :dob, class: 'bank-name-override'
+                .field
+                  = f.label :account_title, 'Account Title'
+                  %p This is usually your name
+                  = f.text_field :name
+                .field
+                  = f.label :account_title, 'Account Number'
+                  %p You may have to include your branch code
+                  = f.text_field :name
+                %p
+                  Sending withdrawals to a third party is
+                  %strong not
+                  allowed and may result in your account being terminated.
+                %ul
+                  %li Fee: 200 PKR per withdrawal
+                  %li Limit: 90,000 PKR per withdrawal
+                .actions
+                  = f.button 'I declare that this is my account', class: 'ui basic red button'
+          .title
+            %i.dropdown.icon
+            Cash via JS Bank
+          .content
+            %p Walk into any JS Bank branch, provide your PIN code, CNIC and collect cash.
+            %ul
+              %li Fee: 150 PKR + 0.5%
+              %li Limit: 50,000 PKR per day
+            = form_for(@verification_banking) do |f|
+              .actions
+                = f.button 'Activate Cash via JS Bank', class: 'ui basic red button'

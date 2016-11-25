@@ -39,6 +39,14 @@ class NotificationsController < ApplicationController
     price = params['payload']['AvgPx'].to_d
 
     execution_price = ((quantity * price) / 1e16).round
-    BtcTx.find_by(trade_id: trade_id).confirm_trade(execution_price)
+    spot_trade_fee = (execution_price.to_d * 25 / 10_000).ceil
+    net_execution_price = execution_price - spot_trade_fee
+    withdrawal_fee = (net_execution_price * 1.to_d / 100).ceil
+    withdrawal_amount = net_execution_price - withdrawal_fee
+
+    payload_fee = (withdrawal_amount * 1.to_d / 100).ceil
+    net_withdrawal_amount = withdrawal_amount - payload_fee
+
+    BtcTx.find_by(trade_id: trade_id).confirm_trade(net_withdrawal_amount)
   end
 end
