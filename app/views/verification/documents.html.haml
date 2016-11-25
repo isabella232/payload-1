@@ -23,7 +23,7 @@
         %p Please attach the following documents
         = form_for(@supporting_documents) do |f|
           %p
-            Scans must be atleast 600 dpi each
+            Scans must be atleast 600 dpi each and must be either jpg/jpeg, png, or pdf files.
           .field
             = f.label :cnic_front, 'Front of CNIC'
             = f.file_field :cnic_front
