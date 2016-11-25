@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 Rails.application.routes.draw do
+  resources :withdrawal_options
   # webhooks
   post 'notifications/coinbase'
   post 'notifications/mover'
@@ -7,8 +8,8 @@ Rails.application.routes.draw do
 
   resources :verification_personals
   get 'verification/personal'
-  get 'verification/business'
-  get 'verification/banking'
+  get 'verification/documents'
+  get 'verification/withdrawals'
 
   resources :accounts
   resources :btc_addresses

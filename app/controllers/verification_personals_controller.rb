@@ -7,7 +7,7 @@ class VerificationPersonalsController < ApplicationController
     @verification_personal.user = current_user
 
     if @verification_personal.save
-      redirect_to verification_business_path, notice: 'Personal information submitted.'
+      redirect_to verification_documents_path, notice: 'Personal information submitted.'
     else
       redirect_to verification_personal_path, notice: 'Something went wrong'
     end
@@ -16,13 +16,12 @@ class VerificationPersonalsController < ApplicationController
   protected
 
   def personal_verification_params
-    byebug
     params
       .fetch(:verification_personal)
       .permit(
         :name,
         :dob,
-        :male,
+        :gender,
         :email_primary,
         :phone_mobile,
         :phone_secondary,

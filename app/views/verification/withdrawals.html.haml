@@ -15,8 +15,8 @@
         .active.step
           %i.credit.card.icon
           .content
-            .title Banking
-            .description Confirm your banking details
+            .title Withdrawals
+            .description Confirm your withdrawal details
     .eight.wide.column
       .ui.form
         .ui.dividing.header Withdrawal details
@@ -30,19 +30,20 @@
             Bank Transfer
           .content
             .transition.hidden
-              = form_for(@verification_banking) do |f|
+              = form_for(@withdrawal_option) do |f|
+                = f.hidden_field(:option_type, value: 'bank_account')
                 .field
                   = f.label :bank_name, 'Bank Name'
-                  = f.select(:dob, @bank_list, {} , class: 'ui dropdown bank-name')
-                  = f.text_field :dob, class: 'bank-name-override'
+                  = f.select(:bank_name, @bank_list, {} , class: 'ui dropdown bank-name')
+                  = f.text_field :bank_name, class: 'bank-name-override'
                 .field
                   = f.label :account_title, 'Account Title'
                   %p This is usually your name
-                  = f.text_field :name
+                  = f.text_field :account_title
                 .field
                   = f.label :account_title, 'Account Number'
                   %p You may have to include your branch code
-                  = f.text_field :name
+                  = f.text_field :account_number
                 %p
                   Sending withdrawals to a third party is
                   %strong not
@@ -60,6 +61,6 @@
             %ul
               %li Fee: 150 PKR + 0.5%
               %li Limit: 50,000 PKR per day
-            = form_for(@verification_banking) do |f|
+            = form_for(@withdrawal_option) do |f|
               .actions
                 = f.button 'Activate Cash via JS Bank', class: 'ui basic red button'

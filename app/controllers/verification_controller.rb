@@ -4,17 +4,14 @@ class VerificationController < ApplicationController
 
   def personal
     @verification_personal = VerificationPersonal.new
-    @verification_personal = current_user.verification_personal if current_user.verification_personal.present?
   end
 
-  def business
+  def documents
     @verification_supporting_documents = VerificationPersonal.new
-    @verification_supporting_documents = current_user.verification_personal if current_user.verification_personal.present?
   end
 
-  def banking
-    @verification_banking = VerificationPersonal.new
-    @verification_banking = current_user.verification_personal if current_user.verification_personal.present?
+  def withdrawals
+    @withdrawal_option = WithdrawalOption.new
     @bank_list = [
       ['Select a Bank', nil],
       ['Allied Bank Limited (ABL)', 'Allied Bank Limited (ABL)'],
@@ -41,7 +38,7 @@ class VerificationController < ApplicationController
       ['Summit Bank', 'Summit Bank'],
       ['Tameer Bank', 'Tameer Bank'],
       ['United Bank Limited (UBL)', 'United Bank Limited (UBL)'],
-      ['Other', 'Other']
+      %w(Other Other)
     ]
   end
 end
