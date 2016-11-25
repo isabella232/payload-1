@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 Rails.application.routes.draw do
+  resources :documents
   resources :withdrawal_options
   # webhooks
   post 'notifications/coinbase'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161125040209) do
+ActiveRecord::Schema.define(version: 20161125045850) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,29 @@ ActiveRecord::Schema.define(version: 20161125040209) do
     t.datetime "updated_at",                                   null: false
     t.string   "trade_id"
     t.index ["btc_address_id"], name: "index_btc_txes_on_btc_address_id", using: :btree
+  end
+
+  create_table "documents", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "cnic_front_file_name"
+    t.string   "cnic_front_content_type"
+    t.integer  "cnic_front_file_size"
+    t.datetime "cnic_front_updated_at"
+    t.string   "cnic_back_file_name"
+    t.string   "cnic_back_content_type"
+    t.integer  "cnic_back_file_size"
+    t.datetime "cnic_back_updated_at"
+    t.string   "cnic_selfie_file_name"
+    t.string   "cnic_selfie_content_type"
+    t.integer  "cnic_selfie_file_size"
+    t.datetime "cnic_selfie_updated_at"
+    t.string   "proof_of_residence_file_name"
+    t.string   "proof_of_residence_content_type"
+    t.integer  "proof_of_residence_file_size"
+    t.datetime "proof_of_residence_updated_at"
+    t.index ["user_id"], name: "index_documents_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -105,6 +128,7 @@ ActiveRecord::Schema.define(version: 20161125040209) do
   add_foreign_key "accounts", "users"
   add_foreign_key "btc_addresses", "users"
   add_foreign_key "btc_txes", "btc_addresses"
+  add_foreign_key "documents", "users"
   add_foreign_key "verification_personals", "users"
   add_foreign_key "withdrawal_options", "users"
 end

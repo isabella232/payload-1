@@ -21,7 +21,9 @@
       .ui.form
         .ui.dividing.header Supporting Documents
         %p Please attach the following documents
-        = form_for(@verification_supporting_documents) do |f|
+        = form_for(@supporting_documents) do |f|
+          %p
+            Scans must be atleast 600 dpi each
           .field
             = f.label :cnic_front, 'Front of CNIC'
             = f.file_field :cnic_front
@@ -29,7 +31,22 @@
             = f.label :cnic_back, 'Back of CNIC'
             = f.file_field :cnic_back
           .field
+            = f.label :cnic_selfie, 'A clear selfie holding the CNIC next to your face'
+            = f.file_field :cnic_selfie
+          .field
             = f.label :proof_of_residence, 'Proof of Residence'
+            %ul
+              %li Dated within the past 3 months
+              %li Containing your name
+              %li Containing your address
+              %li May be a digital document
+              %li
+                Examples:
+                %ul
+                  %li Bank Statement
+                  %li Utility Bill
+                  %li Phone Bill
+
             = f.file_field :proof_of_residence
           .actions
             = f.button 'I declare that this information is accurate', class: 'ui basic red button'

@@ -7,7 +7,7 @@ class VerificationController < ApplicationController
   end
 
   def documents
-    @verification_supporting_documents = VerificationPersonal.new
+    @supporting_documents = Document.new
   end
 
   def withdrawals
