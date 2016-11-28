@@ -2,6 +2,7 @@
 class DocumentsController < ApplicationController
   def create
     @documents = Document.new(document_params)
+    @documents.user = current_user
 
     if @documents.save
       redirect_to verification_withdrawals_path, notice: 'Verification documents submitted.'
