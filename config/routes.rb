@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 Rails.application.routes.draw do
+  resources :withdrawal_txes
   resources :documents
   resources :withdrawal_options
   # webhooks

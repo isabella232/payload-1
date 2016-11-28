@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161125045850) do
+ActiveRecord::Schema.define(version: 20161128142125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -125,10 +125,22 @@ ActiveRecord::Schema.define(version: 20161125045850) do
     t.index ["user_id"], name: "index_withdrawal_options_on_user_id", using: :btree
   end
 
+  create_table "withdrawal_txes", force: :cascade do |t|
+    t.decimal  "amount",              null: false
+    t.decimal  "fee_amount",          null: false
+    t.string   "urdubit_ref"
+    t.integer  "confirmation_status"
+    t.integer  "account_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.index ["account_id"], name: "index_withdrawal_txes_on_account_id", using: :btree
+  end
+
   add_foreign_key "accounts", "users"
   add_foreign_key "btc_addresses", "users"
   add_foreign_key "btc_txes", "btc_addresses"
   add_foreign_key "documents", "users"
   add_foreign_key "verification_personals", "users"
   add_foreign_key "withdrawal_options", "users"
+  add_foreign_key "withdrawal_txes", "accounts"
 end
