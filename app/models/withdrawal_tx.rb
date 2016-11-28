@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # ## Schema Information
 #
 # Table name: `withdrawal_txes`
@@ -28,4 +29,9 @@
 
 class WithdrawalTx < ApplicationRecord
   belongs_to :account
+
+  validates :fee_amount, presence: true
+  validates :amount, presence: true, numericality: true
+
+  enum confirmation_status: %i(processing complete)
 end

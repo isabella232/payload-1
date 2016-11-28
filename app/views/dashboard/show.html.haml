@@ -17,7 +17,9 @@
         %p
           =@user.account.balance.round
           PKR
-        %a.ui.button{href: btc_addresses_path, data: {method: :post}} Withdraw
+        = form_for @withdrawal_tx do |f|
+          .actions
+            = f.submit "Withdraw", class: 'ui teal button', data: {confirm: "Are you sure you want to withdraw all the funds from your account?"}
 
     %table.ui.celled.table
       %thead
