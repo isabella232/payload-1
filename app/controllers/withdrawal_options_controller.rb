@@ -4,8 +4,6 @@ class WithdrawalOptionsController < ApplicationController
     @withdrawal_option.user = current_user
     @withdrawal_option.bank_name = bank_name_override_from_params unless bank_name_override_from_params.empty?
 
-    byebug
-
     if @withdrawal_option.save
       redirect_to dashboard_path, notice: 'Withdrawal information submitted for review.'
     else
