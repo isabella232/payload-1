@@ -1,4 +1,6 @@
 class WithdrawalOptionsController < ApplicationController
+  before_action :authenticate_user!
+
   def create
     @withdrawal_option = WithdrawalOption.new(withdrawal_option_params)
     @withdrawal_option.user = current_user

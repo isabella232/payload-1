@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 class DocumentsController < ApplicationController
+  before_action :authenticate_user!
   def create
     @documents = Document.new(document_params)
     @documents.user = current_user
