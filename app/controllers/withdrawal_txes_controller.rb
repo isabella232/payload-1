@@ -4,7 +4,8 @@ class WithdrawalTxesController < ApplicationController
     withdrawal = WithdrawalTx.new
     withdrawal.amount = current_user.account.balance
     withdrawal.account = current_user.account
-    withdrawal.fee_amount = current_user.withdrawal_option.option_type == 'bank_account' ? (200) : (150 + withdrawal_tx.amount * 1 / 200)
+    withdrawal.method = current_user.withdrawal_option.option_type
+    byebug
     if withdrawal.save
       redirect_to dashboard_path, notice: 'Withdrawal pending'
     else
