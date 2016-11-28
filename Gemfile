@@ -108,6 +108,8 @@ group :production, :staging do
   # Log everything to PaperTrail
   gem 'remote_syslog_logger'
   gem 'lograge'
+  # Storage is in SDK for production
+  gem 'aws-sdk', '~> 2'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
