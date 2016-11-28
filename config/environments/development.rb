@@ -56,4 +56,10 @@ Rails.application.configure do
   # Add Rack::LiveReload to the bottom of the middleware stack with the default options:
   config.middleware.insert_after ActionDispatch::Static, Rack::LiveReload
 
+  # Paper clip's file storage in development
+  Paperclip::Attachment.default_options[:storage] = :filesystem
+  Paperclip::Attachment.default_options[:path] = ':rails_root/public:url'
+  Paperclip::Attachment.default_options[:url] = '/tmp/paperclip/:class/:attachment/:id_partition/:style/:filename'
+
+
 end

@@ -26,3 +26,6 @@ coverage/
 
 # Ignore environment variables
 .env
+
+# Ignore temporary files
+public/tmp
