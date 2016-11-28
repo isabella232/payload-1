@@ -35,7 +35,7 @@
                 .field
                   = f.label :bank_name, 'Bank Name'
                   = f.select(:bank_name, @bank_list, {} , class: 'ui dropdown bank-name')
-                  = f.text_field :bank_name, class: 'bank-name-override'
+                  = text_field :bank_name_override, :bank_name, class: 'bank-name-override'
                 .field
                   = f.label :account_title, 'Account Title'
                   %p This is usually your name

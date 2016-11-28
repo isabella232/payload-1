@@ -2,6 +2,9 @@ class WithdrawalOptionsController < ApplicationController
   def create
     @withdrawal_option = WithdrawalOption.new(withdrawal_option_params)
     @withdrawal_option.user = current_user
+    @withdrawal_option.bank_name = bank_name_override_from_params unless bank_name_override_from_params.empty?
+
+    byebug
 
     if @withdrawal_option.save
       redirect_to dashboard_path, notice: 'Withdrawal information submitted for review.'
@@ -21,5 +24,11 @@ class WithdrawalOptionsController < ApplicationController
         :account_title,
         :account_number
       )
+  end
+
+  def bank_name_override_from_params
+    params
+      .fetch(:bank_name_override)
+      .permit(:bank_name)[:bank_name]
   end
 end
