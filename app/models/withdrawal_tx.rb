@@ -32,27 +32,43 @@
 
 class WithdrawalTx < ApplicationRecord
   before_validation :set_defaults
+  before_save :decrement_account_balance
 
   belongs_to :account
 
   validates :fee_amount, presence: true
-  validates :amount, presence: true, numericality: true
+  validates :amount, presence: true, numericality: { greater_than_or_equal_to: 1_000 }
   validates :confirmation_status, presence: true
 
   enum method: %i(bank_account cash)
   enum confirmation_status: %i(pending processing complete)
 
-  def process_withdrawal
+  def send_withdrawal
+    raise 'withdrawal not pending' unless confirmation_status == 'pending'
     option = account.user.withdrawal_option
     details = account.user.verification_personal
-    _options = {
-      amount:         amount,
+    withdrawal_details = {
+      amount:         (amount - fee_amount).to_s,
       bank_name:      option.bank_name,
       account_number: option.account_number,
-      account_title:  details.legal_name,
+      account_title:  details.name,
       cnic_number:    details.id_cnic,
-      mobile_number:  details.number_primary
+      mobile_number:  details.phone_mobile
     }
+    logger.debug(withdrawal_details)
+    response = HTTParty.post(
+      'https://urdubit.payload.pk/withdraw',
+      query:   {
+        secret: Rails.application.secrets.urdubit_secret
+      },
+      body:    withdrawal_details.to_json,
+      headers: { 'Content-Type' => 'application/json' }
+    )
+    logger.debug(response)
+    self.urdubit_ref = response['WithdrawID']
+    raise 'No response from Urdubit' if urdubit_ref.empty?
+    self.confirmation_status = 'processing'
+    save
   end
 
   private
@@ -61,6 +77,12 @@ class WithdrawalTx < ApplicationRecord
     self.confirmation_status = 'pending'
     self.fee_amount = bank_fee if method == 'bank_account'
     self.fee_amount = cash_fee if method == 'cash'
+  end
+
+  def decrement_account_balance
+    WithdrawalTx.transaction do
+      account.decrement!(:balance, amount)
+    end
   end
 
   def bank_fee
